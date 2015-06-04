@@ -4,8 +4,10 @@ function Theme --argument-names name
   if [ -e $fish_path/themes/$name -o -e $fish_custom/themes/$name ]
     import themes/$name
   else
-    set_color red
-    echo "Theme '$name' is not installed. Run 'omf install' to download and install it."
-    set_color normal
+    if ! $fish_suppress_install_warning
+      set_color yellow
+      echo "Theme '$name' is not installed. Run 'omf install' to download and install it."
+      set_color normal
+    end
   end
 end
